@@ -1,3 +1,8 @@
+.env
+.env*
+.phpintel/
+.phpintel/*
+.phpintel*
 /node_modules
 /public/storage
 /public/hot
@@ -8,7 +13,6 @@ vendor/*
 .idea
 Homestead.json
 Homestead.yaml
-.env
 .DS_Store
 Thumbs.db
 *.sublime-project
