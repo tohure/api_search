@@ -1,5 +1,6 @@
 .env
 .env*
+*.env
 .phpintel/
 .phpintel/*
 .phpintel*
@@ -25,3 +26,4 @@ error.log
 Todo.rtf
 .vagrant
 /.vagrant
+.env
