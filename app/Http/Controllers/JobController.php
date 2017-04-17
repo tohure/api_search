@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Job;
 
@@ -19,7 +21,11 @@ class JobController extends Controller
 
 	}
 
-	public function search($query){
+	public function search(Request $request){
+		$data = $request->all();
+
+		$query = $data["query"];
+
 		$jobs = Job::where('title', $query)->orWhere('title', 'like', '%' . $query . '%')->get();
 
 		if ($jobs) {
