@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::get("api/jobs","JobController@index");
+Route::get("api/jobs/search/{query}","JobController@search");

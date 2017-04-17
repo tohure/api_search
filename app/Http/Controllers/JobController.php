@@ -18,4 +18,14 @@ class JobController extends Controller
 		}
 
 	}
+
+	public function search($query){
+		$jobs = Job::where('title', $query)->orWhere('title', 'like', '%' . $query . '%')->get();
+
+		if ($jobs) {
+			return ['error' => 0, 'data' => $jobs];
+		}else{
+			return ['error' => 1, 'message' => "Bad Request"];
+		}
+	}
 }
