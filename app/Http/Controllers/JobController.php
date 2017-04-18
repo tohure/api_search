@@ -27,10 +27,14 @@ class JobController extends Controller
 		$query = $data["query"];
 		$location = $data["location"];
 
-		if ($query != "" || $query != null) {
+		if (($query != null && $query != "") && ($location == null || $location == "")) {
 			$jobs = Job::where('title', $query)->orWhere('title', 'like', '%' . $query . '%')->get();
-		}else{
+		}else if (($query == null || $query == "") &&  ($location != null && $location != "")){
 			$jobs = Job::where('place', $location)->orWhere('place', 'like', '%' . $location . '%')->get();
+		}else if (($query != null && $query != "") &&  ($location != null && $location != "")){
+			$jobs = Job::where('title', $query)->orWhere('title', 'like', '%' . $query . '%')->where(function($q) use ($location)  {
+		          $q->where('place', $location)->orWhere('place', 'like', '%' . $location . '%');
+		      })->get();
 		}
 
 		if ($jobs) {
