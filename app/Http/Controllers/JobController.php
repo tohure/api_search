@@ -62,16 +62,20 @@ class JobController extends Controller
 	public function recomendados(Request $request) {
 		$data = $request->all();
 
-		$tag = $data["tag"];
-
-		$jobs = Job::where('status', '1')->get();
+		$jobs = Job::where("id","<>",$data["idjob"])->where('status', '1')->get();
 		$recom_jobs = array();
+		$id_jobs = array();
+
+		$pre_tags = explode(",",$data["tags"]);
 
 		foreach ($jobs as $job) {
 			$pre_keywords = $job["keywords"];
 			$keywords = explode(",",$pre_keywords);
-			if (in_array($tag, $keywords)) {
-			    array_push($recom_jobs, $job);
+			foreach ($pre_tags as $pre_tag) {
+				if (in_array($pre_tag, $keywords) && !in_array($job['id'],$id_jobs)) {
+				    array_push($recom_jobs, $job);
+				    array_push($id_jobs,$job["id"]);
+				}
 			}
 		}
 
