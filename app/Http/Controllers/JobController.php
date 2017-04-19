@@ -43,4 +43,19 @@ class JobController extends Controller
 			return ['error' => 1, 'message' => "Bad Request"];
 		}
 	}
+
+	public function jobDetail(Request $request) {
+		$data = $request->all();
+
+		$idjob = $data["idjob"];
+
+		$jobs = Job::find($idjob);
+
+		if ($jobs) {
+			return ['error' => 0, 'data' => $jobs];
+		}else{
+			return ['error' => 1, 'message' => "Bad Request"];
+		}
+
+	}
 }
