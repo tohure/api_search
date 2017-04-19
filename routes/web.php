@@ -18,3 +18,4 @@ Route::get('/', function () {
 Route::get("api/jobs","JobController@index");
 Route::get("api/jobs/search","JobController@search");
 Route::get("api/jobs/detail","JobController@jobDetail");
+Route::get("api/jobs/recomends","JobController@recomendados");

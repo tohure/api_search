@@ -58,4 +58,27 @@ class JobController extends Controller
 		}
 
 	}
+
+	public function recomendados(Request $request) {
+		$data = $request->all();
+
+		$tag = $data["tag"];
+
+		$jobs = Job::where('status', '1')->get();
+		$recom_jobs = array();
+
+		foreach ($jobs as $job) {
+			$pre_keywords = $job["keywords"];
+			$keywords = explode(",",$pre_keywords);
+			if (in_array($tag, $keywords)) {
+			    array_push($recom_jobs, $job);
+			}
+		}
+
+		if ($recom_jobs) {
+			return ['error' => 0, 'data' => $recom_jobs];
+		}else{
+			return ['error' => 1, 'message' => "Bad Request"];
+		}
+	}
 }
